@@ -1,6 +1,7 @@
-import React from "react";
-import { FaLinkedin, FaGithub, FaCode } from "react-icons/fa";
+import React,{useState} from "react";
+import { FaLinkedin, FaGithub, FaCode, FaUserGraduate, FaLaptopCode, FaChartBar } from "react-icons/fa";
 function AboutSection() {
+  const [activeTab, setActiveTab] = useState("education");
   const navCodeSnippets = [
     "nav.render()",
     "{ active: true }",
@@ -200,30 +201,226 @@ function AboutSection() {
 
 
           {/* Right - Text */}
-         <div className="bg-[#1a1a2e] text-white py-16 px-4 md:px-20" id="about">
-  <h2 className="text-4xl font-bold text-center mb-10 text-purple-300">About Me</h2>
-  <div className="max-w-4xl mx-auto text-lg leading-relaxed">
-    <p className="mb-6">
-      Hey! I'm <span className="text-purple-400 font-semibold">Abhishek Duggal</span>, a passionate and innovative Full-Stack Developer focused on building impactful, user-centric digital solutions.
-      I specialize in the <span className="text-purple-400">MERN stack</span> (MongoDB, Express, React, Node.js), and love creating sleek frontends and efficient backends.
-    </p>
+          <div className="bg-[#1a1a2e] text-white py-16 px-4 md:px-20" id="about">
+            <h2 className="text-4xl font-bold text-center mb-10 text-purple-300">About Me</h2>
+            <div className="max-w-4xl mx-auto text-lg leading-relaxed">
+              <p className="mb-6">
+                Hey! I'm <span className="text-purple-400 font-semibold">Abhishek Duggal</span>, a passionate and innovative Full-Stack Developer focused on building impactful, user-centric digital solutions.
+                I specialize in the <span className="text-purple-400">MERN stack</span> (MongoDB, Express, React, Node.js), and love creating sleek frontends and efficient backends.
+              </p>
 
-    <p className="mb-6">
-      My recent projects include a Complete Role Based Society Management System (<span className="italic text-purple-400">Averra</span>) which gains overs 80+ real time users within the first week of launch.
-    </p>
+              <p className="mb-6">
+                My recent projects include a Complete Role Based Society Management System (<span className="italic text-purple-400">Averra</span>) which gains overs 80+ real time users within the first week of launch.
+              </p>
 
-    <p className="mb-6">
-      I’ve also contributed to developer communities like the ACM student chapter as part of the Web and Organizing teams. I enjoy leading from the front — one of my projects was selected in the top 10% under the CSE 3rd year.
-    </p>
+              <p className="mb-6">
+                I've also contributed to developer communities like the ACM student chapter as part of the Web and Organizing teams. I enjoy leading from the front — one of my projects was selected in the top 10% under the CSE 3rd year.
+              </p>
 
-    <p className="mb-6">
-      Beyond coding, I have a strong grasp of data structures, algorithms, cloud computing, operating systems, and agile methodology. I believe in continuous learning, clean code, and building tech that solves real problems.
-    </p>
+              <p className="mb-6">
+                Beyond coding, I have a strong grasp of data structures, algorithms, cloud computing, operating systems, and agile methodology. I believe in continuous learning, clean code, and building tech that solves real problems.
+              </p>
 
-  </div>
-</div>
-
+            </div>
+          </div>
         </div>
+         <div className="bg-[#23233b] min-h-screen text-white px-4 py-10">
+      {/* Tabs */}
+      <div className="text-2xl text-center py-6 flex flex-wrap justify-center gap-8">
+        <button
+          onClick={() => setActiveTab("stats")}
+          className={`px-6 py-2 border rounded-full transition duration-300 ${
+            activeTab === "stats"
+              ? "bg-purple-500 text-white border-purple-500"
+              : "border-purple-400 text-purple-300 hover:bg-purple-500 hover:text-white"
+          }`}
+        >
+          Stats
+        </button>
+        <button
+          onClick={() => setActiveTab("education")}
+          className={`px-6 py-2 border rounded-full transition duration-300 ${
+            activeTab === "education"
+              ? "bg-purple-500 text-white border-purple-500"
+              : "border-purple-400 text-purple-300 hover:bg-purple-500 hover:text-white"
+          }`}
+        >
+          Education
+        </button>
+        <button
+          onClick={() => setActiveTab("skills")}
+          className={`px-6 py-2 border rounded-full transition duration-300 ${
+            activeTab === "skills"
+              ? "bg-purple-500 text-white border-purple-500"
+              : "border-purple-400 text-purple-300 hover:bg-purple-500 hover:text-white"
+          }`}
+        >
+          Skills
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="mt-4 max-w-6xl mx-auto ">
+        {activeTab === "stats" && (
+          <div className="text-center">
+            <FaChartBar className="text-4xl text-purple-400 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold mb-2">Stats</h2>
+            <p className="text-gray-300">Problem solving, projects completed, and coding hours.</p>
+          </div>
+        )}
+
+        {activeTab === "education" && (
+          <div className="max-w-6xl mx-auto space-y-10">
+         <div className="bg-[#121232] border border-purple-900 rounded-xl p-6 shadow-lg">
+    <div className="flex justify-between items-center mb-4">
+      <div className="">
+        <h3 className="text-2xl font-bold">Chitkara University, Rajpura</h3>
+        <h4 className="text-lg text-purple-400 font-semibold">B.Tech in Computer Science Engineering</h4>
+        <p className="text-gray-400 text-sm mt-1">2022 - 2026 | Rajpura, Punjab, India</p>
+      </div>
+      <div className="bg-purple-800 px-4 py-1 text-sm rounded-full flex items-center gap-2">
+        <FaUserGraduate />
+        CGPA: 8.46/10
+      </div>
+    </div>
+    <p className="text-gray-300">
+      Pursuing a Bachelor's degree in Computer Science Engineering with a focus on software development, algorithms, and modern web technologies.
+    </p>
+    <div className="flex flex-wrap gap-3 mt-4">
+      {["Data Structures & Algorithms", "Web Development", "Database Systems", "AWS"].map((tag, i) => (
+        <span key={i} className="bg-[#1f1f2e] text-gray-300 text-xs px-3 py-1 rounded-md">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  {/* 12th Grade Card */}
+  <div className="bg-[#121232] border border-purple-900 rounded-xl p-6 shadow-lg">
+    <div className="flex justify-between items-center mb-4">
+      <div>
+        <h3 className="text-2xl font-bold">Dayanand Public School</h3>
+        <h4 className="text-lg text-purple-400 font-semibold">CBSE - 12th Grade (Science Stream)</h4>
+        <p className="text-gray-400 text-sm mt-1">2020 - 2022 | Nabha, Punjab, India</p>
+      </div>
+      <div className="bg-purple-800 px-4 py-1 text-sm rounded-full flex items-center gap-2">
+        <FaUserGraduate />
+        Percentage: 84%
+      </div>
+    </div>
+    <p className="text-gray-300">
+      Completed higher secondary education with a focus on Physics, Chemistry, Mathematics, and Computer Science.
+    </p>
+    <div className="flex flex-wrap gap-3 mt-4">
+      {["Physics", "Chemistry", "Mathematics", "Computer Science"].map((tag, i) => (
+        <span key={i} className="bg-[#1f1f2e] text-gray-300 text-xs px-3 py-1 rounded-md">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  {/* 10th Grade Card */}
+  <div className="bg-[#121232] border border-purple-900 rounded-xl p-6 shadow-lg">
+    <div className="flex justify-between items-center mb-4">
+      <div>
+        <h3 className="text-2xl font-bold">DAV Cent Public School</h3>
+        <h4 className="text-lg text-purple-400 font-semibold">CBSE - 10th Grade</h4>
+        <p className="text-gray-400 text-sm mt-1">2018 - 2020 | Nabha, Punjab, India</p>
+      </div>
+      <div className="bg-purple-800 px-4 py-1 text-sm rounded-full flex items-center gap-2">
+        <FaUserGraduate />
+        Percentage: 80%
+      </div>
+    </div>
+    <p className="text-gray-300">
+      Completed foundational education with excellence across Science, Math, English, and Computer Applications.
+    </p>
+    <div className="flex flex-wrap gap-3 mt-4">
+      {["Science", "Mathematics", "English", "Computer Applications"].map((tag, i) => (
+        <span key={i} className="bg-[#1f1f2e] text-gray-300 text-xs px-3 py-1 rounded-md">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+  </div>
+        )}
+        {activeTab === "skills" && (
+  <div className="max-w-6xl mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-10">Skills</h2>
+
+    {/* Frontend Development */}
+    <div className="mb-10">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">💻</span>
+        <h3 className="text-xl font-semibold">Frontend Development</h3>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+          { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+          { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+          { name: "Tailwind CSS", icon: "https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"}
+        ].map((tech, i) => (
+          <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
+            <img src={tech.icon} alt={tech.name} className="w-10 h-10 mx-auto mb-2" />
+            <p className="text-gray-300 text-sm">{tech.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Backend & Database */}
+    <div className="mb-10">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">🗄️</span>
+        <h3 className="text-xl font-semibold">Backend & Database</h3>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+          { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+          { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+          { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" }
+        ].map((tech, i) => (
+          <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
+            <img src={tech.icon} alt={tech.name} className="w-10 h-10 mx-auto mb-2" />
+            <p className="text-gray-300 text-sm">{tech.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Tools & Platforms */}
+    <div className="mb-10">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">🛠️</span>
+        <h3 className="text-xl font-semibold">Tools & Platforms</h3>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+          { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+          { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+          { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+          { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+          { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+          { name: "AWS", icon: "https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"
+ }
+        ].map((tool, i) => (
+          <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
+            <img src={tool.icon} alt={tool.name} className="w-10 h-10 mx-auto mb-2" />
+            <p className="text-gray-300 text-sm">{tool.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
+      </div>
+    </div>
 
 
         {/* Keyframes */}
