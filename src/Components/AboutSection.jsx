@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { FaLinkedin, FaGithub, FaCode, FaUserGraduate, FaLaptopCode, FaChartBar } from "react-icons/fa";
+import StatSection from './StatSection.jsx'
 function AboutSection() {
   const [activeTab, setActiveTab] = useState("education");
   const navCodeSnippets = [
@@ -266,6 +267,7 @@ function AboutSection() {
             <FaChartBar className="text-4xl text-purple-400 mx-auto mb-4" />
             <h2 className="text-3xl font-bold mb-2">Stats</h2>
             <p className="text-gray-300">Problem solving, projects completed, and coding hours.</p>
+            <StatSection/>
           </div>
         )}
 
