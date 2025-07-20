@@ -201,7 +201,7 @@ function Home() {
       </div >
 
   {/* Code editor snippet in bottom left */ }
-  < div className = "absolute bottom-30 left-340 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80" >
+  < div className = "absolute bottom-30 left-400 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80" >
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
           <span className="text-gray-400 text-xs font-mono">main.js</span>
           <div className="flex space-x-1">
