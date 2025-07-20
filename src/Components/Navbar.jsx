@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 // Mock icons since we can't import react-icons
 const HomeIcon = () => (
   <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -27,6 +27,7 @@ const icons = {
 
 function ModernNavbar() {
   const [activeItem, setActiveItem] = useState("/");
+const navigate = useNavigate();
 
   const navItems = [
     { to: "/", label: "Home", icon: icons.home },
@@ -36,6 +37,8 @@ function ModernNavbar() {
 
   const handleItemClick = (path) => {
     setActiveItem(path);
+    navigate(path);
+
   };
 
   // Floating code snippets for navbar

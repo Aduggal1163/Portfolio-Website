@@ -217,18 +217,7 @@ function Home() {
         </div>
 
 
-        <div className="absolute bottom-30 left-100 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80">
-          <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
-            <span className="text-gray-400 text-xs font-mono">Resume</span>
-            <div className="flex space-x-1">
-              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            </div>
-          </div>
-          <div className="p-4 h-24 bg-gray-900 rounded-b-lg font-mono text-xs">
-            <div className="text-purple-400">
-              const <span className="text-yellow-400">Resume</span> = {'{'}
-            </div>
+        <div className="absolute bottom-70 left-100 z-10 opacity-80">           
             <button
               onClick={async () => {
                 const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg");
@@ -241,13 +230,10 @@ function Home() {
                 a.click();
                 a.remove();
               }}
-              className="mt-2 ml-4 inline-block px-4 py-1.5 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs"
+              className="mt-2 ml-4 inline-block px-4 py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs"
             >
               Download CV
             </button>
-
-            <div className="text-purple-400">{'};'}</div>
-          </div>
         </div>
 
 
