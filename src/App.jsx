@@ -1,11 +1,21 @@
-import './App.css'
-import React from 'react'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Projects from "./pages/Projects.jsx";
+import About from "./pages/About";
+import "./App.css";
 function App() {
   return (
-    <>
-      ABHISHEK DUGGAL
-    </>
-  )
+    <Router>
+        <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
