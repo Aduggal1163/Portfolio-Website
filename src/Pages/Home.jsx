@@ -234,44 +234,50 @@ function Home() {
         <div>
         </div>
 
-
-        <div className="absolute bottom-70 left-100 z-10 opacity-80">           
-            <button
-              onClick={async () => {
-                const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg");
-                const blob = await res.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "Abhishek_Duggal_CV.jpg";
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-              }}
-              className="mt-2 ml-4 inline-block px-4 py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs"
-            >
-              Download CV
-            </button>
-        </div>
-
-
-
 {/* Additional dev info */ }
 <div className="mt-8 text-gray-400 font-mono text-sm">
   <div className="flex items-center mb-2">
     <span className="text-green-400 mr-2">●</span>
-    <span className="text-blue-400">status:</span> <span className="text-green-400">ready_to_code</span>
+    <span className="text-blue-400">status:</span>
+    <span className="text-green-400 ml-1">ready_to_code</span>
   </div>
+
   <div className="flex items-center mb-2">
     <span className="text-yellow-400 mr-2">●</span>
-    <span className="text-blue-400">location:</span> <span className="text-yellow-400">~/developer/portfolio</span>
+    <span className="text-blue-400">location:</span>
+    <span className="text-yellow-400 ml-1">~/developer/portfolio</span>
   </div>
-  <div className="flex items-center">
+
+  <div className="flex items-center mb-2">
     <span className="text-purple-400 mr-2">●</span>
-    <span className="text-blue-400">mode:</span> <span className="text-purple-400">innovation_mode</span>
+    <span className="text-blue-400">mode:</span>
+    <span className="text-purple-400 ml-1">innovation_mode</span>
+  </div>
+
+  <div className="relative mt-4">
+  <span className="text-green-400 mr-2">●</span>
+  <span className="text-green-400 ml-1">Resume: </span>
+    <button
+      onClick={async () => {
+        const res = await fetch(
+          "https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg"
+        );
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Abhishek_Duggal_CV.jpg";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }}
+      className="inline-block px-4 py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs"
+    >
+      Download CV
+    </button>
   </div>
 </div>
-      </div >
+   </div >
 
   {/* CSS animations */ }
   < style jsx > {`
