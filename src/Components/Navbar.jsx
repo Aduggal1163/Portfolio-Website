@@ -49,7 +49,6 @@ const navigate = useNavigate();
     'onClick()',
     'useState()',
   ];
-
   return (
     <nav className="w-full relative overflow-hidden" style={{
       background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',

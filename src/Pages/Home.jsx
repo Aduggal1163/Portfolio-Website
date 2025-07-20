@@ -34,13 +34,29 @@ const terminalCommands = [
   '$ git status',
   '> Ready to collaborate!'
 ];
-
 function Home() {
   const [current, setCurrent] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [deleting, setDeleting] = useState(false);
   const intervalRef = useRef(null);
+  useEffect(() => {
+    const originalStyles = {
+      margin: document.body.style.margin,
+      padding: document.body.style.padding,
+      overflow: document.body.style.overflow,
+    };
 
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      // Restore original styles on unmount
+      document.body.style.margin = originalStyles.margin;
+      document.body.style.padding = originalStyles.padding;
+      document.body.style.overflow = originalStyles.overflow;
+    };
+  }, []);
   useEffect(() => {
     const currentText = floatingTexts[current];
     if (!deleting && displayText.length < currentText.length) {
@@ -63,22 +79,22 @@ function Home() {
   }, [displayText, deleting, current]);
 
   return (
-    <div className="w-screen h-screen flex p-30 relative overflow-hidden" style={{
-      background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
+    <div className="w-screen h-screen flex p-30 relative  overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
     }}>
-      {/* Background shapes */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Animated geometric shapes */}
-        <div className="absolute opacity-20 animate-pulse" style={{
-          width: '100px',
-          height: '100px',
-          background: 'linear-gradient(45deg, #00d4aa 0%, #00a8ff 100%)',
-          borderRadius: '20px',
+  {/* Background shapes */ }
+  < div className = "absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" >
+    {/* Animated geometric shapes */ }
+    < div className = "absolute opacity-20 animate-pulse" style = {{
+  width: '100px',
+    height: '100px',
+      background: 'linear-gradient(45deg, #00d4aa 0%, #00a8ff 100%)',
+        borderRadius: '20px',
           top: '20%',
-          left: '10%',
-          transform: 'rotate(45deg)',
-          animation: 'float 20s infinite linear'
-        }}></div>
+            left: '10%',
+              transform: 'rotate(45deg)',
+                animation: 'float 20s infinite linear'
+}}></div >
 
         <div className="absolute opacity-15 animate-pulse" style={{
           width: '150px',
@@ -114,40 +130,42 @@ function Home() {
           animation: 'float 20s infinite linear'
         }}></div>
 
-        {/* Floating code snippets */}
-        {codeSnippets.map((snippet, index) => (
-          <div
-            key={index}
-            className="absolute text-green-400 font-mono text-xs opacity-30 animate-pulse whitespace-nowrap"
-            style={{
-              top: `${Math.random() * 80 + 10}%`,
-              left: `${Math.random() * 80 + 10}%`,
-              animationDelay: `${index * 0.5}s`,
-              animation: 'code-float 25s infinite linear'
-            }}
-          >
-            {snippet}
-          </div>
-        ))}
+{/* Floating code snippets */ }
+{
+  codeSnippets.map((snippet, index) => (
+    <div
+      key={index}
+      className="absolute text-green-400 font-mono text-xs opacity-30 animate-pulse whitespace-nowrap"
+      style={{
+        top: `${Math.random() * 80 + 10}%`,
+        left: `${Math.random() * 80 + 10}%`,
+        animationDelay: `${index * 0.5}s`,
+        animation: 'code-float 25s infinite linear'
+      }}
+    >
+      {snippet}
+    </div>
+  ))
+}
 
-        {/* Binary rain effect */}
-        <div className="absolute top-0 left-0 w-full h-full">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute text-blue-400 font-mono text-xs opacity-20"
-              style={{
-                left: `${i * 5}%`,
-                animation: `binary-rain ${3 + Math.random() * 4}s infinite linear`,
-                animationDelay: `${Math.random() * 2}s`
-              }}
-            >
-              {Math.random() > 0.5 ? '1' : '0'}
-            </div>
-          ))}
-        </div>
+{/* Binary rain effect */ }
+<div className="absolute top-0 left-0 w-full h-full">
+  {[...Array(20)].map((_, i) => (
+    <div
+      key={i}
+      className="absolute text-blue-400 font-mono text-xs opacity-20"
+      style={{
+        left: `${i * 5}%`,
+        animation: `binary-rain ${3 + Math.random() * 4}s infinite linear`,
+        animationDelay: `${Math.random() * 2}s`
+      }}
+    >
+      {Math.random() > 0.5 ? '1' : '0'}
+    </div>
+  ))}
+</div>
 
-        {/* Floating brackets and symbols */}
+{/* Floating brackets and symbols */ }
         <div className="absolute text-cyan-400 text-2xl opacity-30 animate-pulse" style={{ top: '15%', left: '5%' }}>{'{'}</div>
         <div className="absolute text-cyan-400 text-2xl opacity-30 animate-pulse" style={{ top: '25%', right: '10%', animationDelay: '1s' }}>{'}'}</div>
         <div className="absolute text-yellow-400 text-xl opacity-30 animate-pulse" style={{ top: '70%', left: '8%', animationDelay: '2s' }}>{'<>'}</div>
@@ -155,16 +173,16 @@ function Home() {
         <div className="absolute text-pink-400 text-xl opacity-30 animate-pulse" style={{ top: '45%', left: '3%', animationDelay: '1.5s' }}>{'[]'}</div>
         <div className="absolute text-green-400 text-lg opacity-30 animate-pulse" style={{ top: '35%', right: '5%', animationDelay: '2.5s' }}>{'&&'}</div>
 
-        {/* Grid overlay */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{
-          backgroundImage: 'linear-gradient(rgba(0, 212, 170, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 170, 0.1) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-          animation: 'grid-move 30s linear infinite'
-        }}></div>
-      </div>
+{/* Grid overlay */ }
+<div className="absolute top-0 left-0 w-full h-full opacity-10" style={{
+  backgroundImage: 'linear-gradient(rgba(0, 212, 170, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 170, 0.1) 1px, transparent 1px)',
+  backgroundSize: '50px 50px',
+  animation: 'grid-move 30s linear infinite'
+}}></div>
+      </div >
 
-      {/* Terminal window in top right */}
-      <div className="absolute top-8 right-8 w-80 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80">
+  {/* Terminal window in top right */ }
+  < div className = "absolute top-8 right-8 w-80 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80" >
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
           <div className="flex space-x-2">
             <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -180,10 +198,10 @@ function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </div >
 
-      {/* Code editor snippet in bottom left */}
-      <div className="absolute bottom-30 left-340 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80">
+  {/* Code editor snippet in bottom left */ }
+  < div className = "absolute bottom-30 left-340 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80" >
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
           <span className="text-gray-400 text-xs font-mono">main.js</span>
           <div className="flex space-x-1">
@@ -198,10 +216,10 @@ function Home() {
           <div className="text-purple-400">{'};'}</div>
 
         </div>
-      </div>
+      </div >
 
-      {/* Main content */}
-      <div className="flex flex-col ml-30 relative z-10 p-10">
+  {/* Main content */ }
+  < div className = "flex flex-col ml-30 relative z-10 p-10" >
         <h2 className="text-lg md:text-2xl font-medium uppercase tracking-widest text-cyan-400 mb-2 font-mono">
           <span className="text-green-400 mr-1">&gt;</span>HI I AM
         </h2>
@@ -238,25 +256,25 @@ function Home() {
 
 
 
-        {/* Additional dev info */}
-        <div className="mt-8 text-gray-400 font-mono text-sm">
-          <div className="flex items-center mb-2">
-            <span className="text-green-400 mr-2">●</span>
-            <span className="text-blue-400">status:</span> <span className="text-green-400">ready_to_code</span>
-          </div>
-          <div className="flex items-center mb-2">
-            <span className="text-yellow-400 mr-2">●</span>
-            <span className="text-blue-400">location:</span> <span className="text-yellow-400">~/developer/portfolio</span>
-          </div>
-          <div className="flex items-center">
-            <span className="text-purple-400 mr-2">●</span>
-            <span className="text-blue-400">mode:</span> <span className="text-purple-400">innovation_mode</span>
-          </div>
-        </div>
-      </div>
+{/* Additional dev info */ }
+<div className="mt-8 text-gray-400 font-mono text-sm">
+  <div className="flex items-center mb-2">
+    <span className="text-green-400 mr-2">●</span>
+    <span className="text-blue-400">status:</span> <span className="text-green-400">ready_to_code</span>
+  </div>
+  <div className="flex items-center mb-2">
+    <span className="text-yellow-400 mr-2">●</span>
+    <span className="text-blue-400">location:</span> <span className="text-yellow-400">~/developer/portfolio</span>
+  </div>
+  <div className="flex items-center">
+    <span className="text-purple-400 mr-2">●</span>
+    <span className="text-blue-400">mode:</span> <span className="text-purple-400">innovation_mode</span>
+  </div>
+</div>
+      </div >
 
-      {/* CSS animations */}
-      <style jsx>{`
+  {/* CSS animations */ }
+  < style jsx > {`
         @keyframes float {
           0% {
             transform: translateY(0px) rotate(0deg);
@@ -314,8 +332,8 @@ function Home() {
             transform: translate(50px, 50px);
           }
         }
-      `}</style>
-    </div>
+      `}</style >
+    </div >
   );
 }
 
