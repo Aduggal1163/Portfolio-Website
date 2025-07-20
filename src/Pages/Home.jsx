@@ -79,7 +79,7 @@ function Home() {
           transform: 'rotate(45deg)',
           animation: 'float 20s infinite linear'
         }}></div>
-        
+
         <div className="absolute opacity-15 animate-pulse" style={{
           width: '150px',
           height: '150px',
@@ -90,7 +90,7 @@ function Home() {
           animationDelay: '-5s',
           animation: 'float 20s infinite linear'
         }}></div>
-        
+
         <div className="absolute opacity-20 animate-pulse" style={{
           width: '80px',
           height: '80px',
@@ -102,7 +102,7 @@ function Home() {
           animationDelay: '-10s',
           animation: 'float 20s infinite linear'
         }}></div>
-        
+
         <div className="absolute opacity-15 animate-pulse" style={{
           width: '120px',
           height: '120px',
@@ -148,12 +148,12 @@ function Home() {
         </div>
 
         {/* Floating brackets and symbols */}
-        <div className="absolute text-cyan-400 text-2xl opacity-30 animate-pulse" style={{top: '15%', left: '5%'}}>{'{'}</div>
-        <div className="absolute text-cyan-400 text-2xl opacity-30 animate-pulse" style={{top: '25%', right: '10%', animationDelay: '1s'}}>{'}'}</div>
-        <div className="absolute text-yellow-400 text-xl opacity-30 animate-pulse" style={{top: '70%', left: '8%', animationDelay: '2s'}}>{'<>'}</div>
-        <div className="absolute text-purple-400 text-lg opacity-30 animate-pulse" style={{top: '80%', right: '20%', animationDelay: '0.5s'}}>{'()'}</div>
-        <div className="absolute text-pink-400 text-xl opacity-30 animate-pulse" style={{top: '45%', left: '3%', animationDelay: '1.5s'}}>{'[]'}</div>
-        <div className="absolute text-green-400 text-lg opacity-30 animate-pulse" style={{top: '35%', right: '5%', animationDelay: '2.5s'}}>{'&&'}</div>
+        <div className="absolute text-cyan-400 text-2xl opacity-30 animate-pulse" style={{ top: '15%', left: '5%' }}>{'{'}</div>
+        <div className="absolute text-cyan-400 text-2xl opacity-30 animate-pulse" style={{ top: '25%', right: '10%', animationDelay: '1s' }}>{'}'}</div>
+        <div className="absolute text-yellow-400 text-xl opacity-30 animate-pulse" style={{ top: '70%', left: '8%', animationDelay: '2s' }}>{'<>'}</div>
+        <div className="absolute text-purple-400 text-lg opacity-30 animate-pulse" style={{ top: '80%', right: '20%', animationDelay: '0.5s' }}>{'()'}</div>
+        <div className="absolute text-pink-400 text-xl opacity-30 animate-pulse" style={{ top: '45%', left: '3%', animationDelay: '1.5s' }}>{'[]'}</div>
+        <div className="absolute text-green-400 text-lg opacity-30 animate-pulse" style={{ top: '35%', right: '5%', animationDelay: '2.5s' }}>{'&&'}</div>
 
         {/* Grid overlay */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{
@@ -175,7 +175,7 @@ function Home() {
         </div>
         <div className="p-4 h-32 overflow-hidden">
           {terminalCommands.map((cmd, index) => (
-            <div key={index} className="text-green-400 font-mono text-xs mb-1 animate-pulse" style={{animationDelay: `${index * 0.3}s`}}>
+            <div key={index} className="text-green-400 font-mono text-xs mb-1 animate-pulse" style={{ animationDelay: `${index * 0.3}s` }}>
               {cmd}
             </div>
           ))}
@@ -208,13 +208,50 @@ function Home() {
         <h1 className="text-7xl font-extrabold text-white mb-3 text-center drop-shadow-2xl">
           Abhishek Duggal
         </h1>
+
         <h1 className="ml-2 text-4xl text-cyan-300 whitespace-nowrap font-bold relative inline-flex h-14 align-middle items-center font-mono">
           I am <span className="text-yellow-400 mx-2">{"=>"}</span> {displayText}
           <span className="animate-pulse border-r-2 border-cyan-400 ml-1 h-8" />
-          
         </h1>
+        <div>
+        </div>
 
-        
+
+        <div className="absolute bottom-30 left-100 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80">
+          <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
+            <span className="text-gray-400 text-xs font-mono">Resume</span>
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            </div>
+          </div>
+          <div className="p-4 h-24 bg-gray-900 rounded-b-lg font-mono text-xs">
+            <div className="text-purple-400">
+              const <span className="text-yellow-400">Resume</span> = {'{'}
+            </div>
+            <button
+              onClick={async () => {
+                const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg");
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "Abhishek_Duggal_CV.jpg";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+              }}
+              className="mt-2 ml-4 inline-block px-4 py-1.5 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs"
+            >
+              Download CV
+            </button>
+
+            <div className="text-purple-400">{'};'}</div>
+          </div>
+        </div>
+
+
+
         {/* Additional dev info */}
         <div className="mt-8 text-gray-400 font-mono text-sm">
           <div className="flex items-center mb-2">
