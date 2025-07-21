@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-// Mock icons since we can't import react-icons
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+// Mock icons
 const HomeIcon = () => (
   <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
@@ -26,8 +27,9 @@ const icons = {
 };
 
 function ModernNavbar() {
-  const [activeItem, setActiveItem] = useState("/");
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activeItem = location.pathname;
 
   const navItems = [
     { to: "/", label: "Home", icon: icons.home },
@@ -36,12 +38,9 @@ const navigate = useNavigate();
   ];
 
   const handleItemClick = (path) => {
-    setActiveItem(path);
     navigate(path);
-
   };
 
-  // Floating code snippets for navbar
   const navCodeSnippets = [
     'nav.render()',
     '{ active: true }',
@@ -49,16 +48,20 @@ const navigate = useNavigate();
     'onClick()',
     'useState()',
   ];
+
   return (
-    <nav className="w-full relative overflow-hidden" style={{
-      background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
-      minHeight: '80px',
-      border:'none',
-      borderRadius:"none"
-    }}>
-      {/* Background animated elements - matching home page */}
+    <nav
+      className="w-full relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
+        minHeight: '80px',
+        border: 'none',
+        borderRadius: 'none'
+      }}
+    >
+      {/* Background animations */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Animated geometric shapes */}
+        {/* Shapes */}
         <div className="absolute opacity-15 animate-pulse" style={{
           width: '60px',
           height: '60px',
@@ -68,7 +71,7 @@ const navigate = useNavigate();
           left: '8%',
           animation: 'navFloat 20s infinite linear'
         }}></div>
-        
+
         <div className="absolute opacity-10 animate-pulse" style={{
           width: '40px',
           height: '40px',
@@ -77,10 +80,10 @@ const navigate = useNavigate();
           top: '10%',
           right: '15%',
           transform: 'rotate(45deg)',
-          animationDelay: '-5s',
-          animation: 'navFloat 20s infinite linear'
+          animation: 'navFloat 20s infinite linear',
+          animationDelay: '-5s'
         }}></div>
-        
+
         <div className="absolute opacity-15 animate-pulse" style={{
           width: '35px',
           height: '35px',
@@ -88,8 +91,8 @@ const navigate = useNavigate();
           borderRadius: '12px',
           bottom: '15%',
           left: '25%',
-          animationDelay: '-10s',
-          animation: 'navFloat 20s infinite linear'
+          animation: 'navFloat 20s infinite linear',
+          animationDelay: '-10s'
         }}></div>
 
         <div className="absolute opacity-10 animate-pulse" style={{
@@ -99,8 +102,8 @@ const navigate = useNavigate();
           borderRadius: '50%',
           top: '30%',
           right: '25%',
-          animationDelay: '-7s',
-          animation: 'navFloat 20s infinite linear'
+          animation: 'navFloat 20s infinite linear',
+          animationDelay: '-7s'
         }}></div>
 
         {/* Floating code snippets */}
@@ -119,7 +122,7 @@ const navigate = useNavigate();
           </div>
         ))}
 
-        {/* Binary rain effect */}
+        {/* Binary rain */}
         <div className="absolute top-0 left-0 w-full h-full">
           {[...Array(8)].map((_, i) => (
             <div
@@ -136,13 +139,13 @@ const navigate = useNavigate();
           ))}
         </div>
 
-        {/* Programming symbols */}
-        <div className="absolute text-cyan-400 text-lg opacity-20 animate-pulse font-mono" style={{top: '25%', left: '5%'}}>{'</'}</div>
-        <div className="absolute text-yellow-400 text-sm opacity-20 animate-pulse font-mono" style={{top: '60%', right: '8%', animationDelay: '1s'}}>{'&&'}</div>
-        <div className="absolute text-purple-400 text-lg opacity-20 animate-pulse font-mono" style={{top: '40%', left: '3%', animationDelay: '2s'}}>{'()'}</div>
-        <div className="absolute text-pink-400 text-sm opacity-20 animate-pulse font-mono" style={{top: '15%', right: '30%', animationDelay: '0.5s'}}>{'[]'}</div>
+        {/* Symbols */}
+        <div className="absolute text-cyan-400 text-lg opacity-20 animate-pulse font-mono" style={{ top: '25%', left: '5%' }}>{'</'}</div>
+        <div className="absolute text-yellow-400 text-sm opacity-20 animate-pulse font-mono" style={{ top: '60%', right: '8%' }}>{'&&'}</div>
+        <div className="absolute text-purple-400 text-lg opacity-20 animate-pulse font-mono" style={{ top: '40%', left: '3%' }}>{'()'}</div>
+        <div className="absolute text-pink-400 text-sm opacity-20 animate-pulse font-mono" style={{ top: '15%', right: '30%' }}>{'[]'}</div>
 
-        {/* Grid overlay */}
+        {/* Grid */}
         <div className="absolute top-0 left-0 w-full h-full opacity-5" style={{
           backgroundImage: 'linear-gradient(rgba(0, 212, 170, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 170, 0.1) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
@@ -150,7 +153,7 @@ const navigate = useNavigate();
         }}></div>
       </div>
 
-      {/* Navigation content */}
+      {/* Main Nav Content */}
       <div className="relative z-10 flex justify-center py-6">
         <div className="flex gap-8">
           {navItems.map((item, index) => (
@@ -163,31 +166,28 @@ const navigate = useNavigate();
                   : "text-cyan-300 hover:text-white"
               }`}
               style={{
-                background: activeItem === item.to 
-                  ? 'linear-gradient(135deg, #00d4aa 0%, #00a8ff 100%)' 
+                background: activeItem === item.to
+                  ? 'linear-gradient(135deg, #00d4aa 0%, #00a8ff 100%)'
                   : 'rgba(15, 15, 35, 0.6)',
                 backdropFilter: 'blur(10px)',
-                border: activeItem === item.to 
-                  ? '1px solid rgba(0, 212, 170, 0.3)' 
+                border: activeItem === item.to
+                  ? '1px solid rgba(0, 212, 170, 0.3)'
                   : '1px solid rgba(100, 255, 218, 0.2)',
-                boxShadow: activeItem === item.to 
-                  ? '0 20px 40px rgba(0, 212, 170, 0.3)' 
+                boxShadow: activeItem === item.to
+                  ? '0 20px 40px rgba(0, 212, 170, 0.3)'
                   : '0 8px 25px rgba(0, 0, 0, 0.3)',
                 animationDelay: `${index * 0.1}s`,
                 animation: 'slideIn 0.6s ease-out forwards'
               }}
             >
-              {/* Hover background effect */}
-              <div 
+              <div
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: activeItem !== item.to 
-                    ? 'linear-gradient(135deg, #00d4aa 0%, #00a8ff 100%)' 
+                  background: activeItem !== item.to
+                    ? 'linear-gradient(135deg, #00d4aa 0%, #00a8ff 100%)'
                     : 'none'
                 }}
               ></div>
-              
-              {/* Content */}
               <span className="relative z-10 flex items-center">
                 <span className="transform group-hover:rotate-12 transition-transform duration-300">
                   {item.icon}
@@ -195,10 +195,9 @@ const navigate = useNavigate();
                 <span className="text-green-400 mr-1 font-mono">&gt;</span>
                 {item.label}
               </span>
-              
-              {/* Active indicator */}
+
               {activeItem === item.to && (
-                <div 
+                <div
                   className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full"
                   style={{
                     background: 'linear-gradient(45deg, #00d4aa 0%, #00f2fe 100%)',
@@ -212,87 +211,39 @@ const navigate = useNavigate();
         </div>
       </div>
 
-      {/* CSS animations */}
       <style jsx>{`
         @keyframes navFloat {
-          0% {
-            transform: translateY(0px) translateX(0px) rotate(0deg);
-          }
-          33% {
-            transform: translateY(-8px) translateX(8px) rotate(120deg);
-          }
-          66% {
-            transform: translateY(8px) translateX(-4px) rotate(240deg);
-          }
-          100% {
-            transform: translateY(0px) translateX(0px) rotate(360deg);
-          }
+          0% { transform: translateY(0) translateX(0) rotate(0deg); }
+          33% { transform: translateY(-8px) translateX(8px) rotate(120deg); }
+          66% { transform: translateY(8px) translateX(-4px) rotate(240deg); }
+          100% { transform: translateY(0) translateX(0) rotate(360deg); }
         }
-        
+
         @keyframes code-float-nav {
-          0% {
-            transform: translateX(-30px) translateY(0px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 0.2;
-          }
-          90% {
-            opacity: 0.2;
-          }
-          100% {
-            transform: translateX(calc(100vw + 30px)) translateY(-10px);
-            opacity: 0;
-          }
+          0% { transform: translateX(-30px); opacity: 0; }
+          10%, 90% { opacity: 0.2; }
+          100% { transform: translateX(100vw); opacity: 0; }
         }
-        
+
         @keyframes binary-rain-nav {
-          0% {
-            transform: translateY(-20px);
-            opacity: 0;
-          }
-          10% {
-            opacity: 0.1;
-          }
-          90% {
-            opacity: 0.1;
-          }
-          100% {
-            transform: translateY(100px);
-            opacity: 0;
-          }
+          0% { transform: translateY(-20px); opacity: 0; }
+          10%, 90% { opacity: 0.1; }
+          100% { transform: translateY(100px); opacity: 0; }
         }
-        
+
         @keyframes grid-move {
-          0% {
-            transform: translate(0, 0);
-          }
-          100% {
-            transform: translate(40px, 40px);
-          }
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(40px, 40px); }
         }
-        
+
         @keyframes slideIn {
-          0% {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          0% { opacity: 0; transform: translateY(-20px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
-        
+
         @keyframes pulse-glow {
-          0% {
-            box-shadow: 0 0 15px rgba(0, 212, 170, 0.8);
-          }
-          50% {
-            box-shadow: 0 0 25px rgba(0, 212, 170, 1), 0 0 35px rgba(0, 212, 170, 0.8);
-          }
-          100% {
-            box-shadow: 0 0 15px rgba(0, 212, 170, 0.8);
-          }
+          0%, 100% { box-shadow: 0 0 15px rgba(0, 212, 170, 0.8); }
+          50% { box-shadow: 0 0 25px rgba(0, 212, 170, 1), 0 0 35px rgba(0, 212, 170, 0.8); }
         }
       `}</style>
     </nav>

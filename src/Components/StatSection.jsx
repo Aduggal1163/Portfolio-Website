@@ -15,6 +15,20 @@ const StatsCard = ({ icon: Icon, value, label, iconColor = "text-purple-400", lo
     </div>
   </div>
 );
+const customBadges = [
+  {
+    name: "50 Days Streak",
+    icon: "https://img.icons8.com/color/48/000000/fire-element.png"
+  },
+  {
+    name: "100 Days Streak",
+    icon: "https://img.icons8.com/color/48/000000/burning-eyes.png"
+  },
+  {
+    name: "365 Days Streak",
+    icon: "https://img.icons8.com/color/48/000000/year-of-monkey.png"
+  }
+];
 
 // ProgressBar Component
 const ProgressBar = ({ label, current, total, color, textColor, loading = false }) => {
@@ -39,23 +53,33 @@ const ProgressBar = ({ label, current, total, color, textColor, loading = false 
   );
 };
 
+// BadgeGrid for LeetCode Badges
 const BadgeGrid = ({ badges = [] }) => (
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-    {badges?.length > 0 ? badges.map((badge, i) => (
-      <div key={badge.name || badge.displayName || i} className="flex items-center space-x-3 bg-gray-700 rounded p-2">
-        <img
-          src={badge.icon || badge.icon_url || badge.badge}
-          alt={badge.name || badge.displayName || "badge"}
-          className="w-8 h-8 rounded"
-        />
-        <span className="text-gray-200 text-sm font-medium">
-          {badge.displayName || badge.name}
-        </span>
-      </div>
-    )) : <p className="text-gray-400 text-sm">No recent badges.</p>}
+  <div className="flex flex-wrap gap-4">
+    {badges.length > 0 ? (
+      badges.map((badge, i) => (
+        <div
+          key={badge.name || badge.displayName || i}
+          className="bg-gray-700 rounded-xl px-4 py-3 flex flex-col items-center w-[130px] shadow-md"
+        >
+          <img
+            src={badge.icon || badge.icon_url || badge.badge}
+            alt={badge.name || badge.displayName || "badge"}
+            className="w-[42px] h-[42px] mb-2"
+          />
+          <p className="text-white text-center text-sm font-semibold leading-4">
+            {badge.name || badge.displayName || "Badge"}
+          </p>
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-400 text-sm">No recent badges.</p>
+    )}
   </div>
 );
 
+
+// HeaderSection Component
 const HeaderSection = ({ title, subtitle, linkText, profileUrl }) => (
   <div className="flex justify-between items-start mb-6">
     <div>
@@ -87,12 +111,14 @@ const HeaderSection = ({ title, subtitle, linkText, profileUrl }) => (
   </div>
 );
 
+// ErrorMessage
 const ErrorMessage = ({ message }) => (
   <div className="bg-red-900 border border-red-700 rounded-lg p-4 text-red-300">
     <p className="text-sm">{message}</p>
   </div>
 );
 
+// UsernameForm Component
 const UsernameForm = ({ onSubmit, loading }) => {
   const [githubUsername, setGithubUsername] = useState('');
   const [leetcodeUsername, setLeetcodeUsername] = useState('');
@@ -150,34 +176,21 @@ const UsernameForm = ({ onSubmit, loading }) => {
   );
 };
 
-// --------------------- GitHub Total Commits Helper (NEW) ----------------------
-const fetchTotalCommits = async (username) => {
+// ---- Helper to fetch GitHub Contributions ----
+const fetchGitHubContributions = async (username) => {
   try {
-    const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-    if (!reposRes.ok) throw new Error('Could not fetch repos');
-    const repos = await reposRes.json();
-    const commitFetches = repos.map(async (repo) => {
-      // Only user's own repos
-      const commitsRes = await fetch(
-        `https://api.github.com/repos/${username}/${repo.name}/commits?author=${username}&per_page=1`
-      );
-      if (!commitsRes.ok) return 0;
-      const linkHeader = commitsRes.headers.get('Link');
-      if (linkHeader) {
-        const match = linkHeader.match(/&page=(\d+)>; rel="last"/);
-        if (match) return parseInt(match[1], 10);
-      }
-      const commits = await commitsRes.json();
-      return Array.isArray(commits) ? commits.length : 0;
-    });
-    const commitCounts = await Promise.all(commitFetches);
-    return commitCounts.reduce((sum, count) => sum + count, 0);
-  } catch (error) {
+    const res = await fetch(`https://github.com/users/${username}/contributions`);
+    if (!res.ok) throw new Error('Could not fetch contributions');
+    const text = await res.text();
+    const matches = Array.from(text.matchAll(/data-count="(\d+)"/g)).map(m => parseInt(m[1]));
+    const total = matches.reduce((a, b) => a + b, 0);
+    return total;
+  } catch {
     return 0;
   }
 };
 
-// ---------------------- Main Component ----------------------
+// ---- Main Component ----
 
 export default function GitHubLeetCodeStats() {
   const [githubData, setGithubData] = useState(null);
@@ -187,23 +200,25 @@ export default function GitHubLeetCodeStats() {
   const [usernames, setUsernames] = useState({ github: 'Aduggal1163', leetcode: 'abhishekd1163' });
   const [showForm, setShowForm] = useState(false);
 
-  // GitHub API fetch function with totalCommits
+  // GitHub API fetch function with contributions
   const fetchGitHubStats = async (username) => {
     try {
-      const [userResponse, forksPromise, totalCommits] = await Promise.all([
+      const [userResponse, reposResponse, contributions] = await Promise.all([
         fetch(`https://api.github.com/users/${username}`),
         fetch(`https://api.github.com/users/${username}/repos?per_page=100`),
-        fetchTotalCommits(username)
+        fetchGitHubContributions(username),
       ]);
-      if (!userResponse.ok) throw new Error(`GitHub user not found: ${username}`);
+      if (!userResponse.ok) {
+        throw new Error(`GitHub user not found: ${username}`);
+      }
       const userData = await userResponse.json();
-      const reposData = await forksPromise.json();
+      const reposData = await reposResponse.json();
       const totalForks = reposData.reduce((sum, repo) => sum + repo.forks_count, 0);
 
       return {
         repos: userData.public_repos,
         forks: totalForks,
-        totalCommits,
+        contributions,
         avatarUrl: userData.avatar_url,
         profileUrl: userData.html_url,
         name: userData.name || userData.login
@@ -239,6 +254,7 @@ export default function GitHubLeetCodeStats() {
         contributionPoints: data.contributionPoints || 0
       };
     } catch (error) {
+      // fallback
       return {
         totalSolved: 0,
         totalQuestions: 3000,
@@ -287,6 +303,7 @@ export default function GitHubLeetCodeStats() {
     }
   };
 
+  // Loading screen
   if (loading && !githubData && !leetcodeData) {
     return (
       <div className="min-h-screen bg-gray-900 p-6 flex items-center justify-center">
@@ -349,18 +366,12 @@ export default function GitHubLeetCodeStats() {
                 />
                 <StatsCard
                   icon={Coffee}
-                  value={githubData?.totalCommits+10 ?? '-'}
-                  label="Total Commits"
+                  value={githubData?.contributions ?? '-'}
+                  label="Contributions"
                   iconColor="text-yellow-400"
                   loading={loading}
                 />
               </div>
-              {githubData?.name && (
-                <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 text-center">
-                  <div className="text-lg font-semibold text-white">{githubData.name}</div>
-                  <div className="text-gray-400">@{usernames.github}</div>
-                </div>
-              )}
             </div>
           )}
 
@@ -414,6 +425,7 @@ export default function GitHubLeetCodeStats() {
                 </div>
               </div>
 
+              {/* Difficulty Breakdown */}
               <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
@@ -449,23 +461,16 @@ export default function GitHubLeetCodeStats() {
                 </div>
               </div>
 
+              {/* Recent Badges */}
               <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
                 <div className="flex items-center space-x-3 mb-6">
                   <Award className="w-6 h-6 text-orange-400" />
                   <h3 className="text-white font-semibold text-lg">Recent Badges</h3>
+                  
                 </div>
-                <BadgeGrid badges={leetcodeData?.badges} />
-              </div>
-            </div>
+<BadgeGrid badges={[...customBadges, ...(leetcodeData?.badges || [])]} />
+</div>      </div>
           )}
-        </div>
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => setShowForm(true)}
-            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-6 rounded-lg transition-colors"
-          >
-            Change Users
-          </button>
         </div>
       </div>
     </div>

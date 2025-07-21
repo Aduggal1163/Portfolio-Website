@@ -228,7 +228,7 @@ function AboutSection() {
          <div className="bg-[#23233b] min-h-screen text-white px-4 py-10">
       {/* Tabs */}
       <div className="text-2xl text-center py-6 flex flex-wrap justify-center gap-8">
-        <button
+        {/* <button
           onClick={() => setActiveTab("stats")}
           className={`px-6 py-2 border rounded-full transition duration-300 ${
             activeTab === "stats"
@@ -237,7 +237,7 @@ function AboutSection() {
           }`}
         >
           Stats
-        </button>
+        </button> */}
         <button
           onClick={() => setActiveTab("education")}
           className={`px-6 py-2 border rounded-full transition duration-300 ${
