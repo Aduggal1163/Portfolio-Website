@@ -288,6 +288,7 @@ useEffect(() => {
           100% { transform: translate(50px, 50px); }
         }
       `}</style>
+      
     </div>
   );
 }
