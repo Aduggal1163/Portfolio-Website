@@ -7,6 +7,11 @@ const HomeIcon = () => (
     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
   </svg>
 );
+const ContactIcon = () => (
+  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M2 4a2 2 0 012-2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm3.6 3a.6.6 0 100 1.2h12.8a.6.6 0 100-1.2H5.6zM6 11.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm5 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm5 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+  </svg>
+);
 
 const ProjectsIcon = () => (
   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -28,6 +33,7 @@ const icons = {
   home: <HomeIcon />,
   projects: <ProjectsIcon />,
   about: <AboutIcon />,
+   contact: <ContactIcon />,
 };
 
 function ModernNavbar() {
@@ -39,6 +45,7 @@ function ModernNavbar() {
     { to: "/", label: "Home", icon: icons.home },
     { to: "/projects", label: "Projects", icon: icons.projects },
     { to: "/about", label: "About", icon: icons.about },
+    { to: "/contact", label: "Contact", icon: icons.contact }, 
   ];
 
   const navCodeSnippets = [
