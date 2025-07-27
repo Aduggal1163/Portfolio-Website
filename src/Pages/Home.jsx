@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+
 const floatingTexts = [
   "Full-Stack dev",
   "Coder",
@@ -27,7 +28,7 @@ const terminalCommands = [
   '$ whoami',
   '> abhishek_duggal',
   '$ ls skills/',
-  '> react.js node.js python.js',
+  '> react.js node.js Java',
   '$ cat passion.txt',
   '> Building amazing things...',
   '$ git status',
@@ -40,17 +41,16 @@ function Home() {
   const [deleting, setDeleting] = useState(false);
   const intervalRef = useRef(null);
 
-useEffect(() => {
-  // Allow vertical scroll, prevent horizontal scroll
-  document.body.style.overflowX = "hidden";
-  document.body.style.overflowY = "auto";
+  useEffect(() => {
+    // Allow vertical scroll, prevent horizontal scroll
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "auto";
 
-  return () => {
-    document.body.style.overflowX = "";
-    document.body.style.overflowY = "";
-  };
-}, []);
-
+    return () => {
+      document.body.style.overflowX = "";
+      document.body.style.overflowY = "";
+    };
+  }, []);
 
   useEffect(() => {
     const currentText = floatingTexts[current];
@@ -74,62 +74,62 @@ useEffect(() => {
   }, [displayText, deleting, current]);
 
   return (
-    <div className="w-screen h-screen flex p-30 relative overflow-hidden" style={{
+    <div className="min-h-screen w-full flex flex-col relative overflow-hidden px-4 sm:px-6 lg:px-8" style={{
       background: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
     }}>
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Geometric shapes */}
+        {/* Geometric shapes - responsive positioning */}
         <div className="absolute opacity-20 animate-pulse" style={{
-          width: '100px',
-          height: '100px',
+          width: 'min(100px, 15vw)',
+          height: 'min(100px, 15vw)',
           background: 'linear-gradient(45deg, #00d4aa 0%, #00a8ff 100%)',
           borderRadius: '20px',
           top: '20%',
-          left: '10%',
+          left: '5%',
           transform: 'rotate(45deg)',
           animation: 'float 20s infinite linear'
         }}></div>
 
         <div className="absolute opacity-15 animate-pulse" style={{
-          width: '150px',
-          height: '150px',
+          width: 'min(150px, 20vw)',
+          height: 'min(150px, 20vw)',
           background: 'linear-gradient(45deg, #ff6b6b 0%, #ee5a52 100%)',
           borderRadius: '50%',
           top: '60%',
-          right: '15%',
+          right: '5%',
           animationDelay: '-5s',
           animation: 'float 20s infinite linear'
         }}></div>
 
         <div className="absolute opacity-20 animate-pulse" style={{
-          width: '80px',
-          height: '80px',
+          width: 'min(80px, 12vw)',
+          height: 'min(80px, 12vw)',
           background: 'linear-gradient(45deg, #4ecdc4 0%, #44a08d 100%)',
           borderRadius: '15px',
           top: '10%',
-          right: '25%',
+          right: '20%',
           transform: 'rotate(30deg)',
           animationDelay: '-10s',
           animation: 'float 20s infinite linear'
         }}></div>
 
         <div className="absolute opacity-15 animate-pulse" style={{
-          width: '120px',
-          height: '120px',
+          width: 'min(120px, 18vw)',
+          height: 'min(120px, 18vw)',
           background: 'linear-gradient(45deg, #a8edea 0%, #fed6e3 100%)',
           borderRadius: '50%',
           bottom: '20%',
-          left: '20%',
+          left: '15%',
           animationDelay: '-15s',
           animation: 'float 20s infinite linear'
         }}></div>
 
-        {/* Floating code snippets */}
-        {codeSnippets.map((snippet, index) => (
+        {/* Floating code snippets - fewer on mobile */}
+        {codeSnippets.slice(0, window.innerWidth < 768 ? 6 : 12).map((snippet, index) => (
           <div
             key={index}
-            className="absolute text-green-400 font-mono text-[10px] opacity-30 animate-pulse whitespace-nowrap"
+            className="absolute text-green-400 font-mono text-xs sm:text-sm opacity-30 animate-pulse whitespace-nowrap hidden sm:block"
             style={{
               top: `${Math.random() * 80 + 10}%`,
               left: `${Math.random() * 80 + 10}%`,
@@ -141,14 +141,14 @@ useEffect(() => {
           </div>
         ))}
 
-        {/* Binary rain */}
+        {/* Binary rain - reduced on mobile */}
         <div className="absolute top-0 left-0 w-full h-full">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(window.innerWidth < 768 ? 10 : 20)].map((_, i) => (
             <div
               key={i}
-              className="absolute text-blue-400 font-mono text-[10px] opacity-20"
+              className="absolute text-blue-400 font-mono text-xs opacity-20 hidden sm:block"
               style={{
-                left: `${i * 5}%`,
+                left: `${i * (100 / (window.innerWidth < 768 ? 10 : 20))}%`,
                 animation: `binary-rain ${3 + Math.random() * 4}s infinite linear`,
                 animationDelay: `${Math.random() * 2}s`
               }}
@@ -158,13 +158,13 @@ useEffect(() => {
           ))}
         </div>
 
-        {/* Symbols */}
-        <div className="absolute text-cyan-400 text-lg opacity-30 animate-pulse" style={{ top: '15%', left: '5%' }}>{'{'}</div>
-        <div className="absolute text-cyan-400 text-base opacity-30 animate-pulse" style={{ top: '25%', right: '10%' }}>{'}'}</div>
-        <div className="absolute text-yellow-400 text-base opacity-30 animate-pulse" style={{ top: '70%', left: '8%' }}>{'<>'}</div>
-        <div className="absolute text-purple-400 text-sm opacity-30 animate-pulse" style={{ top: '80%', right: '20%' }}>{'()'}</div>
-        <div className="absolute text-pink-400 text-base opacity-30 animate-pulse" style={{ top: '45%', left: '3%' }}>{'[]'}</div>
-        <div className="absolute text-green-400 text-sm opacity-30 animate-pulse" style={{ top: '35%', right: '5%' }}>{'&&'}</div>
+        {/* Symbols - responsive positioning */}
+        <div className="absolute text-cyan-400 text-lg opacity-30 animate-pulse" style={{ top: '15%', left: '2%' }}>{'{'}</div>
+        <div className="absolute text-cyan-400 text-base opacity-30 animate-pulse" style={{ top: '25%', right: '8%' }}>{'}'}</div>
+        <div className="absolute text-yellow-400 text-base opacity-30 animate-pulse" style={{ top: '70%', left: '5%' }}>{'<>'}</div>
+        <div className="absolute text-purple-400 text-sm opacity-30 animate-pulse" style={{ top: '80%', right: '15%' }}>{'()'}</div>
+        <div className="absolute text-pink-400 text-base opacity-30 animate-pulse" style={{ top: '45%', left: '1%' }}>{'[]'}</div>
+        <div className="absolute text-green-400 text-sm opacity-30 animate-pulse" style={{ top: '35%', right: '3%' }}>{'&&'}</div>
 
         {/* Grid overlay */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{
@@ -174,91 +174,132 @@ useEffect(() => {
         }}></div>
       </div>
 
-      {/* Terminal */}
-      <div className="absolute top-8 right-6 w-80 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80">
+      {/* Terminal - responsive positioning and sizing */}
+      <div className="absolute top-4 right-2 sm:top-8 sm:right-6 w-64 sm:w-80 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80 hidden md:block">
         <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
           <div className="flex space-x-2">
             <div className="w-3 h-3 bg-red-500 rounded-full"></div>
             <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
-          <span className="text-gray-400 text-[10px] font-mono">terminal</span>
+          <span className="text-gray-400 text-xs font-mono">terminal</span>
         </div>
         <div className="p-4 h-32 overflow-hidden">
           {terminalCommands.map((cmd, index) => (
-            <div key={index} className="text-green-400 font-mono text-[10px] mb-1 animate-pulse" style={{ animationDelay: `${index * 0.3}s` }}>
+            <div key={index} className="text-green-400 font-mono text-xs mb-1 animate-pulse" style={{ animationDelay: `${index * 0.3}s` }}>
               {cmd}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Code snippet bottom-left */}
-      <div className="absolute bottom-2 left-305 w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80">
-        <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
-          <span className="text-gray-400 text-[10px] font-mono">main.js</span>
-          <div className="flex space-x-1">
-            <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          </div>
-        </div>
-        <div className="p-4 h-24 bg-gray-900 rounded-b-lg font-mono text-[10px]">
-          <div className="text-purple-400">const <span className="text-yellow-400">portfolio</span> = {'{'}</div>
-          <div className="text-blue-400 ml-4">name: <span className="text-green-400">"Abhishek Duggal"</span>,</div>
-          <div className="text-blue-400 ml-4">passion: <span className="text-green-400">"Coding"</span></div>
-          <div className="text-purple-400">{'};'}</div>
-        </div>
-      </div>
+      {/* Code snippet bottom-left - responsive positioning and sizing */}
+      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-6 w-64 sm:w-72 bg-gray-900 rounded-lg border border-gray-600 shadow-2xl z-10 opacity-80 hidden lg:block">
+  <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
+    <span className="text-gray-400 text-xs font-mono">main.js</span>
+    <div className="flex space-x-1">
+      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+    </div>
+  </div>
+  <div className="p-4 h-24 bg-gray-900 rounded-b-lg font-mono text-xs">
+    <div className="text-purple-400">
+      const <span className="text-yellow-400">portfolio</span> = {'{'}
+    </div>
+    <div className="text-blue-400 ml-4">
+      name: <span className="text-green-400">"Abhishek Duggal"</span>,
+    </div>
+    <div className="text-blue-400 ml-4">
+      passion: <span className="text-green-400">"Coding"</span>
+    </div>
+    <div className="text-purple-400">{'};'}</div>
+  </div>
+</div>
 
-      {/* Main Content */}
-      <div className="flex flex-col ml-30 relative z-10 p-10">
-        <h2 className="text-base md:text-xl font-medium uppercase tracking-widest text-cyan-400 mb-2 font-mono">
+
+      {/* Main Content - responsive layout */}
+      <div className="flex-1 flex flex-col justify-center items-center text-center sm:items-start sm:text-left relative z-10 py-8 sm:py-16 max-w-7xl mx-auto w-full">
+        <h2 className="text-sm sm:text-base md:text-xl font-medium uppercase tracking-widest text-cyan-400 mb-2 sm:mb-4 font-mono">
           <span className="text-green-400 mr-1">&gt;</span>HI I AM
         </h2>
-        <h1 className="text-6xl font-extrabold text-white mb-3 text-center drop-shadow-2xl">
+        
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-3 sm:mb-6 drop-shadow-2xl leading-tight">
           Abhishek Duggal
         </h1>
-        <h1 className="ml-2 text-3xl text-cyan-300 whitespace-nowrap font-bold relative inline-flex h-14 items-center font-mono">
-          I am <span className="text-yellow-400 mx-2">{"=>"}</span> {displayText}
-          <span className="animate-pulse border-r-2 border-cyan-400 ml-1 h-8" />
-        </h1>
+        
+        <div className="flex flex-col sm:flex-row items-center sm:items-start mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl md:text-3xl text-cyan-300 font-bold font-mono flex items-center flex-wrap justify-center sm:justify-start">
+            <span className="mr-2">I am</span>
+            <span className="text-yellow-400 mx-2">{"=>"}</span>
+            <span className="min-w-0 break-words">{displayText}</span>
+            <span className="animate-pulse border-r-2 border-cyan-400 ml-1 h-6 sm:h-8" />
+          </h1>
+        </div>
 
-        <div className="mt-8 text-gray-400 font-mono text-[10px]">
-          <div className="flex items-center mb-2">
+        {/* Status info - responsive layout */}
+        <div className="text-gray-400 font-mono text-xs sm:text-sm space-y-2 sm:space-y-3 w-full max-w-md sm:max-w-none">
+          <div className="flex items-center justify-center sm:justify-start">
             <span className="text-green-400 mr-2">●</span>
             <span className="text-blue-400">status:</span>
             <span className="text-green-400 ml-1">ready_to_code</span>
           </div>
-          <div className="flex items-center mb-2">
+          <div className="flex items-center justify-center sm:justify-start">
             <span className="text-yellow-400 mr-2">●</span>
             <span className="text-blue-400">location:</span>
-            <span className="text-yellow-400 ml-1">~/developer/portfolio</span>
+            <span className="text-yellow-400 ml-1 break-all">~/developer/portfolio</span>
           </div>
-          <div className="flex items-center mb-2">
+          <div className="flex items-center justify-center sm:justify-start">
             <span className="text-purple-400 mr-2">●</span>
             <span className="text-blue-400">mode:</span>
             <span className="text-purple-400 ml-1">innovation_mode</span>
           </div>
 
-          <div className="relative mt-4">
+          <div className="flex items-center justify-center sm:justify-start pt-4">
             <span className="text-green-400 mr-2">●</span>
-            <span className="text-green-400 ml-1">Resume: </span>
+            <span className="text-green-400 mr-2">Resume:</span>
             <button
               onClick={async () => {
-                const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg");
-                const blob = await res.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "Abhishek_Duggal_CV.jpg";
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
+                try {
+                  const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg");
+                  const blob = await res.blob();
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "Abhishek_Duggal_CV.jpg";
+                  document.body.appendChild(a);
+                  a.click();
+                  a.remove();
+                  window.URL.revokeObjectURL(url);
+                } catch (error) {
+                  console.error('Download failed:', error);
+                }
               }}
-              className="inline-block px-4 py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-[10px]"
+              className="px-3 py-2 sm:px-4 sm:py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs sm:text-sm active:bg-green-700"
             >
               Download CV
             </button>
+          </div>
+        </div>
+
+        {/* Mobile-only terminal and code snippets */}
+        <div className="mt-8 w-full space-y-4 md:hidden">
+          {/* Mobile Terminal */}
+          <div className="w-full bg-gray-900 rounded-lg border border-gray-600 shadow-2xl opacity-80">
+            <div className="flex items-center justify-between px-4 py-2 bg-gray-800 rounded-t-lg">
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span className="text-gray-400 text-xs font-mono">terminal</span>
+            </div>
+            <div className="p-4 h-24 overflow-hidden">
+              {terminalCommands.slice(0, 4).map((cmd, index) => (
+                <div key={index} className="text-green-400 font-mono text-xs mb-1">
+                  {cmd}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -288,7 +329,6 @@ useEffect(() => {
           100% { transform: translate(50px, 50px); }
         }
       `}</style>
-      
     </div>
   );
 }

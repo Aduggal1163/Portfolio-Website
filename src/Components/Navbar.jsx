@@ -1,12 +1,12 @@
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-
-// Smaller icons
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// Icon components
 const HomeIcon = () => (
   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
   </svg>
 );
+
 const ContactIcon = () => (
   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
     <path d="M2 4a2 2 0 012-2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm3.6 3a.6.6 0 100 1.2h12.8a.6.6 0 100-1.2H5.6zM6 11.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm5 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm5 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
@@ -29,17 +29,28 @@ const AboutIcon = () => (
   </svg>
 );
 
+const MenuIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+
 const icons = {
   home: <HomeIcon />,
   projects: <ProjectsIcon />,
   about: <AboutIcon />,
-   contact: <ContactIcon />,
+  contact: <ContactIcon />,
 };
 
 function ModernNavbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const activeItem = location.pathname;
+  const [activeItem, setActiveItem] = useState("/");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
     { to: "/", label: "Home", icon: icons.home },
@@ -56,6 +67,18 @@ function ModernNavbar() {
     "useState()",
   ];
 
+ const navigate = useNavigate();
+
+const handleNavigation = (to) => {
+  setActiveItem(to);
+  setIsMobileMenuOpen(false);
+  navigate(to); // ✅ Navigates to the route
+};
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <nav
       className="w-full relative overflow-hidden"
@@ -68,9 +91,9 @@ function ModernNavbar() {
     >
       {/* Background animations */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Shapes */}
+        {/* Geometric shapes - responsive */}
         <div
-          className="absolute opacity-15 animate-pulse"
+          className="absolute opacity-15 animate-pulse hidden sm:block"
           style={{
             width: "40px",
             height: "40px",
@@ -83,7 +106,7 @@ function ModernNavbar() {
         ></div>
 
         <div
-          className="absolute opacity-10 animate-pulse"
+          className="absolute opacity-10 animate-pulse hidden md:block"
           style={{
             width: "30px",
             height: "30px",
@@ -98,7 +121,7 @@ function ModernNavbar() {
         ></div>
 
         <div
-          className="absolute opacity-15 animate-pulse"
+          className="absolute opacity-15 animate-pulse hidden sm:block"
           style={{
             width: "28px",
             height: "28px",
@@ -112,7 +135,7 @@ function ModernNavbar() {
         ></div>
 
         <div
-          className="absolute opacity-10 animate-pulse"
+          className="absolute opacity-10 animate-pulse hidden md:block"
           style={{
             width: "35px",
             height: "35px",
@@ -125,11 +148,11 @@ function ModernNavbar() {
           }}
         ></div>
 
-        {/* Floating code snippets */}
+        {/* Floating code snippets - hidden on mobile */}
         {navCodeSnippets.map((snippet, index) => (
           <div
             key={index}
-            className="absolute text-green-400 font-mono text-[10px] opacity-20 animate-pulse whitespace-nowrap"
+            className="absolute text-green-400 font-mono text-[10px] opacity-20 animate-pulse whitespace-nowrap hidden lg:block"
             style={{
               top: `${20 + Math.random() * 40}%`,
               left: `${Math.random() * 80 + 10}%`,
@@ -141,12 +164,12 @@ function ModernNavbar() {
           </div>
         ))}
 
-        {/* Binary rain */}
+        {/* Binary rain - reduced on mobile */}
         <div className="absolute top-0 left-0 w-full h-full">
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
-              className="absolute text-blue-400 font-mono text-[10px] opacity-10"
+              className="absolute text-blue-400 font-mono text-[10px] opacity-10 hidden md:block"
               style={{
                 left: `${i * 12}%`,
                 animation: `binary-rain-nav ${2 + Math.random() * 2}s infinite linear`,
@@ -158,27 +181,27 @@ function ModernNavbar() {
           ))}
         </div>
 
-        {/* Symbols */}
+        {/* Symbols - responsive visibility */}
         <div
-          className="absolute text-cyan-400 text-xs opacity-20 animate-pulse font-mono"
+          className="absolute text-cyan-400 text-xs opacity-20 animate-pulse font-mono hidden sm:block"
           style={{ top: "25%", left: "5%" }}
         >
           {"</"}
         </div>
         <div
-          className="absolute text-yellow-400 text-[10px] opacity-20 animate-pulse font-mono"
+          className="absolute text-yellow-400 text-[10px] opacity-20 animate-pulse font-mono hidden md:block"
           style={{ top: "60%", right: "8%" }}
         >
           {"&&"}
         </div>
         <div
-          className="absolute text-purple-400 text-xs opacity-20 animate-pulse font-mono"
+          className="absolute text-purple-400 text-xs opacity-20 animate-pulse font-mono hidden sm:block"
           style={{ top: "40%", left: "3%" }}
         >
           {"()"}
         </div>
         <div
-          className="absolute text-pink-400 text-[10px] opacity-20 animate-pulse font-mono"
+          className="absolute text-pink-400 text-[10px] opacity-20 animate-pulse font-mono hidden md:block"
           style={{ top: "15%", right: "30%" }}
         >
           {"[]"}
@@ -196,13 +219,13 @@ function ModernNavbar() {
         ></div>
       </div>
 
-      {/* Main Nav Content */}
-      <div className="relative z-10 flex justify-center py-4">
+      {/* Desktop Navigation */}
+      <div className="relative z-10 hidden md:flex justify-center py-4">
         <div className="flex gap-6">
           {navItems.map((item, index) => (
             <button
               key={item.to}
-              onClick={() => navigate(item.to)}
+              onClick={() => handleNavigation(item.to)}
               className={`group relative flex items-center px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 font-mono ${
                 activeItem === item.to
                   ? "text-white shadow-2xl"
@@ -253,6 +276,95 @@ function ModernNavbar() {
               )}
             </button>
           ))}
+        </div>
+      </div>
+
+      {/* Mobile Navigation Header */}
+      <div className="relative z-10 flex md:hidden justify-between items-center px-4 py-3">
+        {/* Brand/Logo */}
+        <div className="flex items-center">
+          <span className="text-cyan-400 font-mono text-lg font-bold">
+            <span className="text-green-400 mr-1">&lt;</span>
+            Portfolio
+            <span className="text-green-400 ml-1">/&gt;</span>
+          </span>
+        </div>
+
+        {/* Hamburger Menu Button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="text-cyan-300 hover:text-white transition-all duration-300 p-2 rounded-lg"
+          style={{
+            background: "rgba(15, 15, 35, 0.6)",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(100, 255, 218, 0.2)",
+          }}
+        >
+          {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      <div 
+        className={`md:hidden relative z-10 overflow-hidden transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        style={{
+          background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)",
+          borderTop: isMobileMenuOpen ? "1px solid rgba(100, 255, 218, 0.1)" : "none",
+        }}
+      >
+        <div className="px-4 py-2">
+          {navItems.map((item, index) => (
+            <button
+              key={item.to}
+              onClick={() => handleNavigation(item.to)}
+              className={`w-full flex items-center px-4 py-3 text-left font-mono transition-all duration-300 rounded-lg mb-1 ${
+                activeItem === item.to
+                  ? "text-white"
+                  : "text-cyan-300 hover:text-white"
+              }`}
+              style={{
+                background:
+                  activeItem === item.to
+                    ? "linear-gradient(135deg, #00d4aa 0%, #00a8ff 100%)"
+                    : "transparent",
+                backdropFilter: activeItem === item.to ? "blur(10px)" : "none",
+                border:
+                  activeItem === item.to
+                    ? "1px solid rgba(0, 212, 170, 0.3)"
+                    : "1px solid transparent",
+                boxShadow:
+                  activeItem === item.to
+                    ? "0 4px 12px rgba(0, 212, 170, 0.2)"
+                    : "none",
+                animationDelay: `${index * 0.1}s`,
+                animation: isMobileMenuOpen ? "slideInMobile 0.4s ease-out forwards" : "none",
+              }}
+            >
+              <span className="flex items-center">
+                {item.icon}
+                <span className="text-green-400 mr-2 font-mono">&gt;</span>
+                {item.label}
+              </span>
+              {activeItem === item.to && (
+                <div
+                  className="ml-auto w-2 h-2 rounded-full"
+                  style={{
+                    background: "linear-gradient(45deg, #00d4aa 0%, #00f2fe 100%)",
+                    boxShadow: "0 0 8px rgba(0, 212, 170, 0.8)",
+                  }}
+                ></div>
+              )}
+            </button>
+          ))}
+        </div>
+        
+        {/* Mobile menu footer */}
+        <div className="px-4 py-2 border-t border-gray-700">
+          <div className="text-xs text-gray-400 font-mono text-center">
+            <span className="text-green-400">●</span> Ready to code
+          </div>
         </div>
       </div>
 
@@ -320,6 +432,17 @@ function ModernNavbar() {
           100% {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInMobile {
+          0% {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
           }
         }
 
