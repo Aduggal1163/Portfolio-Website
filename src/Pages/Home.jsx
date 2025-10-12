@@ -260,7 +260,7 @@ function Home() {
             <button
               onClick={async () => {
                 try {
-                  const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1753008170/AbhishekDuggal_Resume_page-0001_wqxvby.jpg");
+                  const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1760254334/AbhishekDuggal_jfidu5.jpg");
                   const blob = await res.blob();
                   const url = window.URL.createObjectURL(blob);
                   const a = document.createElement("a");
