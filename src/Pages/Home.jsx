@@ -260,12 +260,12 @@ function Home() {
             <button
               onClick={async () => {
                 try {
-                  const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1760254334/AbhishekDuggal_jfidu5.jpg");
+                  const res = await fetch("https://res.cloudinary.com/desmscq2h/image/upload/v1779100282/AbhishekDuggal-Resume_page-0001_fvqx32.jpg");
                   const blob = await res.blob();
                   const url = window.URL.createObjectURL(blob);
                   const a = document.createElement("a");
                   a.href = url;
-                  a.download = "Abhishek_Duggal_CV.jpg";
+                  a.download = "AbhishekDuggal_Resume.jpg";
                   document.body.appendChild(a);
                   a.click();
                   a.remove();
@@ -276,7 +276,7 @@ function Home() {
               }}
               className="px-3 py-2 sm:px-4 sm:py-3 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 transition-all duration-300 text-xs sm:text-sm active:bg-green-700"
             >
-              Download CV
+              Download 
             </button>
           </div>
         </div>

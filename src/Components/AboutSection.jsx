@@ -282,7 +282,7 @@ function AboutSection() {
       </div>
       <div className="bg-purple-800 px-4 py-1 text-sm rounded-full flex items-center gap-2">
         <FaUserGraduate />
-        CGPA: 8.46/10
+        CGPA: 8.75/10
       </div>
     </div>
     <p className="text-gray-300">
@@ -350,6 +350,30 @@ function AboutSection() {
         )}
         {activeTab === "skills" && (
   <div className="max-w-6xl mx-auto px-4">
+
+    {/* Languages */}
+    <div className="mb-10">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">🔤</span>
+        <h3 className="text-xl font-semibold">Languages</h3>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+          { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+          { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+          { name: "SQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+          { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+          { name: "GoLang", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" },
+        ].map((tech, i) => (
+          <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
+            <img src={tech.icon} alt={tech.name} className="w-10 h-10 mx-auto mb-2" />
+            <p className="text-gray-300 text-sm">{tech.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
     {/* Frontend Development */}
     <div className="mb-10">
       <div className="flex items-center gap-2 mb-4">
@@ -359,9 +383,9 @@ function AboutSection() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
         {[
           { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-          { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-          { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-          { name: "Tailwind CSS", icon: "https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"}
+          { name: "Vite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" },
+          { name: "Tailwind CSS", icon: "https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" },
+          { name: "Bootstrap", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
         ].map((tech, i) => (
           <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
             <img src={tech.icon} alt={tech.name} className="w-10 h-10 mx-auto mb-2" />
@@ -381,11 +405,35 @@ function AboutSection() {
         {[
           { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
           { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+          { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+          { name: "SQLAlchemy", icon: "https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white" },
+          { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
           { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-          { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" }
+          { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
         ].map((tech, i) => (
           <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
             <img src={tech.icon} alt={tech.name} className="w-10 h-10 mx-auto mb-2" />
+            <p className="text-gray-300 text-sm">{tech.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* AI / LLM */}
+    <div className="mb-10">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">🤖</span>
+        <h3 className="text-xl font-semibold">AI / LLM</h3>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { name: "LangChain", icon: "https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" },
+          { name: "Ollama", icon: "https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white" },
+          { name: "RAG", icon: "https://img.shields.io/badge/RAG-6366F1?style=for-the-badge&logo=openai&logoColor=white" },
+          { name: "ChromaDB", icon: "https://img.shields.io/badge/ChromaDB-FF6F00?style=for-the-badge&logo=databricks&logoColor=white" },
+        ].map((tech, i) => (
+          <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
+            <img src={tech.icon} alt={tech.name} className="w-10 h-10 mx-auto mb-2 object-contain" />
             <p className="text-gray-300 text-sm">{tech.name}</p>
           </div>
         ))}
@@ -401,21 +449,40 @@ function AboutSection() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
         {[
           { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+          { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
           { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
           { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
           { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
           { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-          { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-          { name: "AWS", icon: "https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"
- }
+          { name: "AWS", icon: "https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" },
         ].map((tool, i) => (
           <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
-            <img src={tool.icon} alt={tool.name} className="w-10 h-10 mx-auto mb-2" />
+            <img src={tool.icon} alt={tool.name} className="w-10 h-10 mx-auto mb-2 object-contain" />
             <p className="text-gray-300 text-sm">{tool.name}</p>
           </div>
         ))}
       </div>
     </div>
+
+    {/* Other */}
+    <div className="mb-10">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-xl">📚</span>
+        <h3 className="text-xl font-semibold">Other</h3>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {[
+          { name: "DSA", icon: "https://img.shields.io/badge/DSA-007ACC?style=for-the-badge&logo=thealgorithms&logoColor=white" },
+          { name: "REST APIs", icon: "https://img.shields.io/badge/REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white" },
+        ].map((item, i) => (
+          <div key={i} className="bg-[#111827] p-4 rounded-lg shadow-md">
+            <img src={item.icon} alt={item.name} className="w-10 h-10 mx-auto mb-2 object-contain" />
+            <p className="text-gray-300 text-sm">{item.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
   </div>
 )}
 

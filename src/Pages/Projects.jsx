@@ -3,6 +3,27 @@ import ProjectCard from "../Components/ProjectCard";
 function Projects() {
   const projects = [
     {
+      image:"https://res.cloudinary.com/desmscq2h/image/upload/v1779084538/Screenshot_2026-05-18_at_11.38.25_AM_sdsuov.png",
+      title:"Documentor AI",
+      desc:"Built a RAG-based document Q&A system using LangChain, FastAPI, and Ollama (local LLM), enabling semantic search across PDF, DOCX, and TXT files with full priv…Built a RAG-based document Q&A system using LangChain, FastAPI, and Ollama (local LLM), enabling semantic search across PDF, DOCX, and TXT files with full privacy — no external API dependency. Features an AI-powered diagram generator for flowcharts, mind maps, and sequence diagrams from natural language, plus JWT-secured authentication for secure multi-user access. Tech stack: FastAPI, LangChain, Ollama, ChromaDB.",
+      github:"https://github.com/Aduggal1163/Documentor-AI"
+    },
+    {
+      image:"https://res.cloudinary.com/desmscq2h/image/upload/v1779084278/Screenshot_2026-05-18_at_11.33.34_AM_z1jc34.png",
+      title:"NextStep",
+      desc:"NextStep is a full-stack smart wedding planning platform built with React, Node.js/Express, and MongoDB, designed to eliminate the overwhelm of wedding planning by bringing everything into one structured system. It features a step-by-step planning workflow with checklist-based progress tracking, a vendor discovery and booking system with full lifecycle management, and a personalized recommendation engine that suggests vendors based on user preferences, budget, and event requirements. The platform also includes real-time chat between users and vendors, and an event-driven notification system for bookings, messages, and updates — all tied together through a structured multi-role architecture supporting Users, Vendors, and Admins. Tech stack: React, Node.js, Express.js, MongoDB, REST API.",
+      github:"https://github.com/Aduggal1163/NextStep_WP-2210991163-2210991120-2210991574"
+    },
+    {
+      image:"https://res.cloudinary.com/desmscq2h/image/upload/v1779083572/Screenshot_2026-05-18_at_11.22.23_AM_laxj7g.png",
+      title:"TaskBridge",
+      desc:`
+          TaskBridge is a full-stack team collaboration and project management platform built with React.js on the frontend and Node.js/Express on the backend. It allows teams to create, assign, and track tasks seamlessly, keeping everyone aligned and projects on schedule. The app follows a clean monorepo architecture separating client and server concerns, with the frontend deployed on Vercel for fast global access. Tech stack: JavaScript, React.js, Node.js, Express.js, REST API.
+      `,
+      github: "https://github.com/Aduggal1163/TaskBridge",
+      live: "https://task-bridge-indol.vercel.app/"
+    },
+    {
       image: "https://res.cloudinary.com/desmscq2h/image/upload/v1753011869/Averra_c4kkvc.png",
       title: "Aveera",
       desc: `
@@ -46,12 +67,6 @@ FaceConnect enables seamless peer-to-peer video and audio calls directly within 
 • Enhanced user experience with real-time updates, intuitive UI, and efficient content management modules.`,
  github: "https://github.com/Aduggal1163/SeekAndWork",
 },
-  {
-    title:"TeamTrack",
-    image:"https://res.cloudinary.com/desmscq2h/image/upload/v1753012335/Screenshot_2025-07-20_172117_rmznyp.png",
-    desc:"Built TeamTrack, a MERN stack-based Employee Management System to streamline HR operations. Features include secure user authentication, employee onboarding, role-based dashboards, performance tracking, leave management, and real-time status updates. Offers a responsive, user-friendly interface with robust backend control for efficient workforce management.",
-     github: "https://github.com/Aduggal1163/EmployeeManagementSystem",
-  },
   ];
 
   const navCodeSnippets = [
