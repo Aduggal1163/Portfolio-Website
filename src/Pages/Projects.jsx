@@ -12,7 +12,8 @@ function Projects() {
       image:"https://res.cloudinary.com/desmscq2h/image/upload/v1779084278/Screenshot_2026-05-18_at_11.33.34_AM_z1jc34.png",
       title:"NextStep",
       desc:"NextStep is a full-stack smart wedding planning platform built with React, Node.js/Express, and MongoDB, designed to eliminate the overwhelm of wedding planning by bringing everything into one structured system. It features a step-by-step planning workflow with checklist-based progress tracking, a vendor discovery and booking system with full lifecycle management, and a personalized recommendation engine that suggests vendors based on user preferences, budget, and event requirements. The platform also includes real-time chat between users and vendors, and an event-driven notification system for bookings, messages, and updates — all tied together through a structured multi-role architecture supporting Users, Vendors, and Admins. Tech stack: React, Node.js, Express.js, MongoDB, REST API.",
-      github:"https://github.com/Aduggal1163/NextStep_WP-2210991163-2210991120-2210991574"
+      github:"https://github.com/Aduggal1163/NextStep_WP-2210991163-2210991120-2210991574",
+      live:"https://next-step-steel-mu.vercel.app/"
     },
     {
       image:"https://res.cloudinary.com/desmscq2h/image/upload/v1779083572/Screenshot_2026-05-18_at_11.22.23_AM_laxj7g.png",
