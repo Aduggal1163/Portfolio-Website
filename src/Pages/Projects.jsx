@@ -3,6 +3,13 @@ import ProjectCard from "../Components/ProjectCard";
 function Projects() {
   const projects = [
     {
+      image:"https://res.cloudinary.com/desmscq2h/image/upload/v1781771917/Screenshot_2026-06-17_at_10.11.33_PM_egod4d.png",
+      title:"ClassMatrix",
+      desc:"Developed ClassMatrix, a full-stack educational hub automating student enrollment, teacher assignments, and academic course mappings via a FastAPI backend and React frontend. Implemented robust Role-Based Access Control (RBAC) across 15+ secured REST API endpoints, enabling custom portals for admins (user/roster CRUD), class supervisors (student tracking/subject assignment), and students (profile/subject views). Features custom registration validation pipelines to securely link login accounts with database records using JWT auth and a MySQL backend.",
+      github:"https://github.com/Aduggal1163/FastAPI-Basics-to-Project/tree/main/ClassMatrix",
+      live:"https://classmatrix-kt80i5c4q-abhisheks-projects-53fd1647.vercel.app/"
+    },
+    {
       image:"https://res.cloudinary.com/desmscq2h/image/upload/v1779084538/Screenshot_2026-05-18_at_11.38.25_AM_sdsuov.png",
       title:"Documentor AI",
       desc:"Built a RAG-based document Q&A system using LangChain, FastAPI, and Ollama (local LLM), enabling semantic search across PDF, DOCX, and TXT files with full priv…Built a RAG-based document Q&A system using LangChain, FastAPI, and Ollama (local LLM), enabling semantic search across PDF, DOCX, and TXT files with full privacy — no external API dependency. Features an AI-powered diagram generator for flowcharts, mind maps, and sequence diagrams from natural language, plus JWT-secured authentication for secure multi-user access. Tech stack: FastAPI, LangChain, Ollama, ChromaDB.",

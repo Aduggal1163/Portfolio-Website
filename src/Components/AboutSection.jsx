@@ -282,7 +282,7 @@ function AboutSection() {
       </div>
       <div className="bg-purple-800 px-4 py-1 text-sm rounded-full flex items-center gap-2">
         <FaUserGraduate />
-        CGPA: 8.75/10
+        CGPA: 8.84/10
       </div>
     </div>
     <p className="text-gray-300">
